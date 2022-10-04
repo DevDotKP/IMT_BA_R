@@ -1,0 +1,377 @@
+
+                  
+install.packages("caret")  # One time work
+library(caret)             # Repeat every time when you open your R studio
+
+
+  #  Data Analytics with R
+
+# Variables
+
+Salary<-1000
+print(Salary)
+
+
+Country<-"India"
+print(Country)
+
+
+# install a package
+
+install.packages("babar")
+
+# Load this package
+library("babar")
+
+
+
+
+                           #  Data types in R Programming
+# 1. Numeric data
+Age<-34
+class (Age)
+
+#  2. Integer Data
+
+Number_participants=41L
+class(Number_participants)
+
+
+#  3. Logical data
+2>1
+Answer=2>3
+class(Answer)
+
+#  4. Character data=======factor() or Category
+Name="Santosh"
+class(Name)
+
+Gender="Male"
+class(Gender)
+
+# Change in factor
+Gender=as.factor(Gender)
+class(Gender)
+
+                               
+
+# If you want to store multiple data, use c()
+
+Number_Students<-c(23,34,23)
+class(Number_Students)
+
+Number_Students = as.integer(Number_Students)
+class(Number_Students)
+
+Phone_Number= c(9660765117, 9041558144)
+class(Phone_Number)
+mean(Phone_Number)
+
+Phone_Number = as.character(Phone_Number)    # Change in character from numeric
+
+class(Phone_Number)
+
+mean(Phone_Number)
+
+                                 # Data Structure in R
+
+
+# Vector : it is one dimensional and homogeneous,
+# We can create vector using c() syntax.      
+
+Age=c(12,23,34,47)
+class(Age)
+
+Name <-c('A','B','C','D')
+class(Name)
+
+Dummy<-c('A',23,'B',47)
+class(Dummy)
+Dummy
+
+Dummy[4]
+
+    # [ ] Elements can be assessed by using index function.
+
+
+# 2. Matrix : It is two dimensional and homogeneous and can be created using matrix() function.
+
+3:14  # Create a sequence of number from 3 to 14
+c(3:14)  # Store in a vector
+
+M<-matrix(  c(3:14), nrow=4, byrow = TRUE)
+M
+class(M)
+
+M [row_number,   column_number]     # Access the element at 3rd column and 1st row.
+M[  4,  3]
+
+L<-matrix(  c('A',23,'B',47), nrow = 2 )
+L
+
+Demo<-matrix(c(12,23,34,34,43,42), nrow=3)
+Demo
+
+
+# 3. Array is created using the array() function. Syntax is array(data, dim(row, cloumn, matrix))
+
+States<-c('UP','MP','DL','MH', 'AZ','CA','UT','CC', 'Grand_east','Brittany','Corsica','Parisregion')
+Array1<- array(States, dim=c(2,2,3) )  #(rows, column, matrix)
+print(Array1) 
+
+
+# Print the 2nd row of the second matrix of the array. 
+Array1[ 1 ,2 ,1]
+
+# Print the element in the 1st row and 2nd column of the matrix. 
+Array1[1,  ,3]
+
+# Print the 2nd Matrix. 
+print(Array1[  ,   , 2]) 
+
+
+            # A data frame is a table where column contains feature and each row contains records.
+
+# A data frame can be created by data.frame () syntax.
+
+emp_id = c (1:5)     # by nature it is character
+emp_id
+class(emp_id)
+
+
+emp_name = c("Rick","Dan","Michelle","Ryan","Gary")
+class(emp_name)
+
+salary = c(623.3,515.2,611.0,729.0,234)
+class(salary)
+
+Final_Data <- data.frame( emp_id,emp_name,salary) 
+class(Final_Data)
+print(Final_Data) str(Final_Data) View(Final_Data) dim(Final_Data)
+
+                                  
+
+#  Final_Data [ rows   ,  column   ]
+
+Final_Data [ c(1,2,3),   c(3,2)]
+
+# Accessing Data Frame using $ sign
+Final_Data$salary
+
+# Accessing row and column using indexing approach
+Final_Data [row,  column]
+
+Final_Data [ c(1,3,4)    ,  c('salary','emp_name')   ]
+
+
+
+# The working directory is just a file path on your computer that sets the default 
+# location of any files you read into R, or save out of R. 
+
+
+getwd()
+
+setwd("D:\\2022-2024\\Business Analytics")
+
+getwd()
+
+
+
+
+# Reading CSV File in R
+data<-read.csv("MBASSData.csv")
+class(data)
+View(data)
+str(data)
+
+data$sex =  as.factor( data$sex)
+data$satis = as.factor(data$satis)
+data$Gender = as.factor(data$Gender)
+
+str(data)
+View(data)
+summary(data)
+
+# Create a New Variable in DataFrame
+
+colnames(data)
+data$Agesquare=data$age*data$age
+View(data)
+
+
+                  #Graph
+        
+#Boxplot shows the distribution of numeric data and divides data into three quarries. 
+        
+        
+boxplot(data$salary, horizontal = TRUE, main="Distribution of Salary", xlab="Salary",col="green")
+
+boxplot(data$salary, horizontal = FALSE, main="Distribution of Salary", ylab="Salary",col="green")
+
+boxplot(log(data$salary), horizontal = FALSE, main="Distribution of Salary", ylab="Salary",col="green")
+
+boxplot(data$gmat_tot, horizontal = TRUE, main="GMAT TOTAL", xlab="score",col="green")
+        
+          
+            # Combined Boxplot
+
+            par(mfrow=c(1,2))
+            
+            
+boxplot(data$s_avg, horizontal = FALSE, main="Spring MBA average", ylab="grade",col="green")
+boxplot(data$f_avg, horizontal = FALSE, main="Fall MBA average", ylab="grade",col="green")
+
+
+
+        #To plot graph between work_experience Vs salary
+
+boxplot(data$salary~data$frstlang,main="Salary versus first lang",col="green")
+boxplot(log(data$salary)~data$frstlang,main="Salary versus first lang",col="green")
+        
+
+
+                                              # Histogram
+
+hist( data$age, main = ' Distribution of age', col='red' , freq = TRUE   )
+hist(data$gmat_tot, xlab="total percentile", main="GMAT TOTAL", col = "yellow")
+hist(data$gmat_qpc, xlab="percentile", main="GMAT quantitative percentile", col = "yellow")
+
+                         
+                               # Combined histogram
+
+                                par(mfrow=c(1,2))
+                                
+                                
+hist(data$s_avg, xlab="Grade", main="Spring MBA average", col = "yellow")
+hist(data$f_avg, xlab="Grade", main="Fall MBA average", col="yellow")
+
+                             
+
+                           #using scatterplot
+
+install.packages('car')
+library(car)
+
+plot(data$gmat_qpc, data$gmat_vpc)
+plot(data$salary, data$age)
+
+
+                               # Using Barplot
+# Create the data for the chart 
+H <- c(7,12,28,3,41) 
+M <- c("Mar","Apr","May","Jun","Jul") 
+
+# Plot the bar chart 
+barplot(H, names.arg=M,col="blue")
+
+View(data)
+
+                  # Sub-setting rows using the subset function
+
+# Find the records for which salary is more than 100000
+
+data_salary_10000=subset(data,data$salary>100000)
+ 
+View(data_salary_10000)
+
+# Find the records for which gender is 1 and salary is more than 10000
+               
+data_salary_10000_1=subset(data,data$salary>100000 & data$sex==1)
+               
+View(data_salary_10000_1)
+            
+# Find the records for which gender is 1 or salary is more than 100000
+data_salary_10000_M_F=subset(data,data$salary>100000 | data$sex==1)
+View(data_salary_10000_M_F)
+   
+
+# Find the proportion of gender (Male/Female)
+
+table(data$frstlang)
+prop.table(table(data$frstlang))
+               
+              # sort by age
+
+data_age<-data[order(data$age), ]
+View(data_age)
+
+# sort by age and gmat_tot
+             
+data_age_gmattot<-data [order (data$age,data$gmat_tot),    ]
+View(data_age_gmattot)
+
+#sort by age (ascending) and gmat_tot (descending)
+data_age_gmattot_des<-data[order(data$age,-data$gmat_tot),]
+View(data_age_gmattot_des)
+
+                        
+
+                         # Data Processing in R
+
+# Indicates about records which has missing value
+
+summary(data)         # Check missing value in data
+complete.cases(data)  # Will get False is missing value
+
+sum(complete.cases(data))  # Total number of records with no missing value
+nrow(data)                 # Total number of records
+
+Missing_Data=nrow(data)-sum(complete.cases(data))   # Number of records having missing values
+Missing_Data
+
+# Delete the records  with missing values and store in new dataset called data3
+
+data3<-na.omit(data)   # Delete All the records having missing value
+nrow(data3)
+summary(data3)
+
+# Imputation of missing values Replace by (Mean or Median)
+
+is.na(data$age)
+sum(is.na(data$age))
+
+X1=c(1,2,3,NA)
+median(X1, na.rm=TRUE)
+
+hist(data$age)
+data$age[ is.na(data$age)]<-median(data$age, na.rm = TRUE)
+sum(is.na(data$age))
+
+sum(is.na(data$salary))
+hist(data$salary)
+data$salary [ is.na(data$salary)]<-mean(data$salary, na.rm = TRUE)
+
+str(data)
+is.na(data$satis)
+sum(is.na(data$satis))
+summary(data$satis)
+data$satis[ is.na(data$satis)]<-6
+         
+
+#Install.packages("outliers")
+   
+install.packages('EnvStats')
+library(EnvStats)
+
+boxplot(data$age, horizontal = FALSE, main="Age", xlab="years",col="green")
+
+outlier<-rosnerTest(data$age, k=10)
+outlier
+          
+data_without_outlier<- data[ c(-20,-89 ,-145 ,-19 ,-54 ,-225 ,-46 ,-206), ]
+boxplot( data_without_outlier$age, col='red')
+
+
+Data_With_Outlier<-data[ c(20,89 ,145 ,19 ,54 ,225 ,46 ,206), ]
+
+Data_With_Outlier
+
+                                     # Function in R
+
+new.function<-function(a,b,c){
+  result=a*b+c
+  print(result)
+}
+
+new.function(1,2,3)                 # Call function with argument  
+  
